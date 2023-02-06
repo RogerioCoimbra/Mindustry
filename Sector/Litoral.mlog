@@ -1,0 +1,42 @@
+set @max 17000
+set @result01 0
+set @result02 0
+set @result03 0
+set @ligado 0
+sensor @result01 nucleus1 @plastanium
+sensor @result02 nucleus1 @spore-pod
+sensor @result03 nucleus1 @thorium
+sensor @ligado switch1 @enabled
+jump 14 equal @ligado true
+control enabled conveyor1 1 0 0 0
+control enabled conveyor2 1 0 0 0
+control enabled conveyor3 1 0 0 0
+end
+print "Plastanium: "
+print @result01
+jump 19 lessThan @result01 @max
+print " - Esteira parada"
+control enabled conveyor1 0 0 0 0
+jump 22 greaterThanEq @result01 @max
+print " - Esteira trabalhando"
+control enabled conveyor1 1 0 0 0
+printflush message1
+print "Spore-Pod: "
+print @result02
+jump 28 lessThan @result02 @max
+print " - Esteira parada"
+control enabled conveyor2 0 0 0 0
+jump 31 greaterThanEq @result02 @max
+print " - Esteira trabalhando"
+control enabled conveyor2 1 0 0 0
+printflush message2
+print "Thorium: "
+print @result03
+jump 37 lessThan @result03 @max
+print " - Esteira parada"
+control enabled conveyor3 0 0 0 0
+jump 40 greaterThanEq @result03 @max
+print " - Esteira trabalhando"
+control enabled conveyor3 1 0 0 0
+printflush message3
+end
